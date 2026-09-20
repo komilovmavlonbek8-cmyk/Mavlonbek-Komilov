@@ -462,8 +462,8 @@ export const PackageDetailModal: React.FC<PackageDetailModalProps> = ({
         </div>
 
         {/* [13] FIXED PASTDA: [Sotib olish] [Bo'lib to'lash] */}
-        <div className="absolute bottom-0 left-0 right-0 p-3 bg-[#0b111e]/95 backdrop-blur-md border-t border-slate-800 z-30">
-          <div className="grid grid-cols-2 gap-2 max-w-md mx-auto">
+        <div className="absolute bottom-0 left-0 right-0 p-3 pb-6 sm:pb-3 bg-[#0b111e]/95 backdrop-blur-md border-t border-slate-800 z-30">
+          <div className="grid grid-cols-2 gap-2.5 max-w-md mx-auto">
             <button
               onClick={() => {
                 triggerHaptic('medium');

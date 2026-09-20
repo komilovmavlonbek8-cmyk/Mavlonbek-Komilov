@@ -120,7 +120,19 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
     setIsEditingPackage(false);
   };
 
-  const menuGroups = [
+  interface AdminMenuItem {
+    id: AdminSection;
+    label: string;
+    icon: React.ComponentType<{ className?: string }>;
+    badge: string | number | null;
+  }
+
+  interface AdminMenuGroup {
+    title: string;
+    items: AdminMenuItem[];
+  }
+
+  const menuGroups: AdminMenuGroup[] = [
     {
       title: 'Asosiy Boshqaruv',
       items: [
@@ -157,67 +169,68 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
   return (
     <div className="fixed inset-0 z-50 bg-[#0a0f1d] text-slate-100 flex flex-col overflow-hidden animate-fadeIn">
       {/* TopBar */}
-      <header className="px-4 py-3 bg-[#0d1527] border-b border-slate-800 flex items-center justify-between shrink-0">
-        <div className="flex items-center gap-2.5">
+      <header className="px-3 sm:px-4 py-2.5 sm:py-3 bg-[#0d1527] border-b border-slate-800 flex items-center justify-between shrink-0">
+        <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
           <button
             onClick={() => {
               triggerHaptic('light');
               onClose();
             }}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 shrink-0"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
-          <div>
-            <h1 className="text-sm font-extrabold text-white flex items-center gap-1.5">
-              <Shield className="w-4 h-4 text-indigo-400" />
-              Guzasht Admin Panel
+          <div className="min-w-0">
+            <h1 className="text-xs sm:text-sm font-extrabold text-white flex items-center gap-1.5 truncate">
+              <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-indigo-400 shrink-0" />
+              <span>Admin: {menuGroups.flatMap(g => g.items).find(i => i.id === activeSection)?.label}</span>
             </h1>
-            <span className="text-[10px] text-slate-400">11 ta boshqaruv moduli (Ustun menyu)</span>
+            <span className="text-[10px] text-slate-400 hidden sm:block">11 ta boshqaruv moduli (Ustun menyu)</span>
           </div>
         </div>
 
         <button
           onClick={onClose}
-          className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300"
+          className="px-2.5 sm:px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 shrink-0"
         >
-          Ilovaga qaytish
+          Chiqish
         </button>
       </header>
 
       {/* Body: Left Vertical Column (Ustun) + Right Main Workspace */}
       <div className="flex-1 flex overflow-hidden">
-        {/* Ustun Navigatsiya (Sidebar) */}
-        <aside className="w-48 sm:w-60 shrink-0 bg-[#0b1222] border-r border-slate-800 flex flex-col justify-between overflow-y-auto no-scrollbar">
-          <div className="p-2.5 sm:p-3 space-y-3.5">
+        {/* Ustun Navigatsiya (Sidebar) - Compact on phone (w-12), Full on laptop (w-60) */}
+        <aside className="w-12 sm:w-60 shrink-0 bg-[#0b1222] border-r border-slate-800 flex flex-col justify-between overflow-y-auto no-scrollbar">
+          <div className="p-1.5 sm:p-3 space-y-2 sm:space-y-3.5">
             {menuGroups.map((group, gIdx) => (
               <div key={gIdx} className="space-y-1">
-                <span className="text-[9px] sm:text-[10px] font-black tracking-wider text-slate-400 uppercase px-2 block">
+                <span className="text-[9px] sm:text-[10px] font-black tracking-wider text-slate-400 uppercase px-1 sm:px-2 hidden sm:block">
                   {group.title}
                 </span>
-                <div className="space-y-0.5">
+                <div className="space-y-0.5 sm:space-y-1">
                   {group.items.map((item) => {
                     const Icon = item.icon;
                     const isActive = activeSection === item.id;
                     return (
                       <button
                         key={item.id}
+                        title={item.label}
                         onClick={() => {
                           triggerHaptic('light');
                           setActiveSection(item.id);
                         }}
-                        className={`w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-xs font-semibold transition text-left ${
+                        className={`w-full flex items-center justify-center sm:justify-between p-2 sm:px-2.5 sm:py-2 rounded-xl text-xs font-semibold transition text-left ${
                           isActive
                             ? 'bg-indigo-600 text-white shadow-md font-bold'
                             : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
                         }`}
                       >
                         <div className="flex items-center gap-2 min-w-0">
-                          <Icon className={`w-3.5 h-3.5 shrink-0 ${isActive ? 'text-white' : 'text-slate-400'}`} />
-                          <span className="truncate text-[11px] sm:text-xs">{item.label}</span>
+                          <Icon className={`w-4 h-4 sm:w-3.5 sm:h-3.5 shrink-0 ${isActive ? 'text-white' : 'text-slate-400'}`} />
+                          <span className="truncate text-[11px] sm:text-xs hidden sm:inline">{item.label}</span>
                         </div>
                         {item.badge !== null && item.badge !== undefined && (
-                          <span className={`text-[9px] px-1.5 py-0.5 rounded-full shrink-0 font-bold ${
+                          <span className={`text-[9px] px-1.5 py-0.5 rounded-full shrink-0 font-bold hidden sm:inline ${
                             isActive ? 'bg-white/20 text-white' : 'bg-slate-800 text-slate-400'
                           }`}>
                             {item.badge}
@@ -232,12 +245,12 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
           </div>
 
           {/* Status info at bottom of sidebar */}
-          <div className="p-2.5 border-t border-slate-800/80 bg-slate-900/50 text-[10px] text-slate-400 flex items-center justify-between">
+          <div className="p-2 sm:p-2.5 border-t border-slate-800/80 bg-slate-900/50 text-[10px] text-slate-400 flex items-center justify-center sm:justify-between">
             <span className="flex items-center gap-1 text-emerald-400 font-medium">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              Onlayn
+              <span className="hidden sm:inline">Onlayn</span>
             </span>
-            <span className="font-mono text-slate-400">11 bo'lim</span>
+            <span className="font-mono text-slate-400 hidden sm:inline">11 bo'lim</span>
           </div>
         </aside>
 

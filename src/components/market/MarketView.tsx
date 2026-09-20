@@ -55,7 +55,7 @@ export const MarketView: React.FC<MarketViewProps> = ({
   return (
     <div className="space-y-3 pb-24">
       {/* Search Bar (Uzum Market Style) */}
-      <div className="px-4 pt-2">
+      <div className="px-3 sm:px-4 pt-2">
         <button
           onClick={() => {
             triggerHaptic('light');
@@ -63,19 +63,19 @@ export const MarketView: React.FC<MarketViewProps> = ({
           }}
           className="w-full flex items-center justify-between px-3.5 py-2.5 bg-slate-900/90 border border-slate-700/70 hover:border-sky-400/60 rounded-2xl text-slate-400 text-xs shadow-md active:scale-98 transition"
         >
-          <div className="flex items-center gap-2">
-            <Search className="w-4 h-4 text-sky-400" />
-            <span>Tur paket yoki shaharni qidirish...</span>
+          <div className="flex items-center gap-2 truncate">
+            <Search className="w-4 h-4 text-sky-400 shrink-0" />
+            <span className="truncate">Tur paket yoki shaharni qidirish...</span>
           </div>
-          <span className="text-[10px] bg-slate-800 px-2 py-0.5 rounded-full text-slate-400 font-medium">
+          <span className="text-[10px] bg-slate-800 px-2 py-0.5 rounded-full text-slate-400 font-medium shrink-0">
             24 oy 0%
           </span>
         </button>
       </div>
 
       {/* Sticky Horizontal Filters Row */}
-      <div className="sticky top-[57px] z-20 bg-[#0b111e]/90 backdrop-blur-md py-2 border-b border-slate-800/60">
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar px-4">
+      <div className="sticky top-[53px] sm:top-[57px] z-20 bg-[#0b111e]/90 backdrop-blur-md py-2 border-b border-slate-800/60">
+        <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar px-3 sm:px-4">
           {filterTabs.map((tab) => (
             <button
               key={tab.id}
@@ -96,13 +96,13 @@ export const MarketView: React.FC<MarketViewProps> = ({
       </div>
 
       {/* 2-Column Grid (FAQAT 24 oylik narx ko'rinadi) */}
-      <div className="px-4">
+      <div className="px-3 sm:px-4">
         <div className="flex items-center justify-between text-xs text-slate-400 mb-2 font-medium">
-          <span>{filteredAndSortedPackages.length} ta tur paket mavjud</span>
-          <span className="text-cyan-400 font-bold">24 oyga foizsiz muddat</span>
+          <span>{filteredAndSortedPackages.length} ta tur paket</span>
+          <span className="text-cyan-400 font-bold">24 oyga 0% muddat</span>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
           {filteredAndSortedPackages.map((pkg) => (
             <PackageCard
               key={pkg.id}

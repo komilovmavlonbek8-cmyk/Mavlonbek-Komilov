@@ -79,33 +79,33 @@ export const PackageCard: React.FC<PackageCardProps> = ({
       </div>
 
       {/* Card Content */}
-      <div className="flex flex-col flex-1 p-3">
+      <div className="flex flex-col flex-1 p-2.5 sm:p-3">
         {/* Company Info */}
-        <div className="flex items-center gap-1.5 mb-1.5">
+        <div className="flex items-center gap-1.5 mb-1">
           <img
             src={pkg.companyLogo}
             alt={pkg.companyName}
-            className="w-4 h-4 rounded-full object-cover border border-slate-700"
+            className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full object-cover border border-slate-700 shrink-0"
           />
-          <span className="text-[11px] font-medium text-slate-400 truncate">
+          <span className="text-[10px] sm:text-[11px] font-medium text-slate-400 truncate">
             {pkg.companyName}
           </span>
         </div>
 
         {/* Tour Title */}
-        <h3 className="text-xs sm:text-sm font-bold text-white line-clamp-2 leading-snug group-hover:text-sky-300 transition-colors">
+        <h3 className="text-xs sm:text-sm font-bold text-white line-clamp-2 leading-snug group-hover:text-sky-300 transition-colors min-h-[32px]">
           {pkg.title}
         </h3>
 
         {/* Days & Sold Count */}
-        <p className="text-[11px] text-slate-400 mt-1">
+        <p className="text-[10px] sm:text-[11px] text-slate-400 mt-1">
           {pkg.durationDays} kun • {pkg.soldCount} ta sotilgan
         </p>
 
         {/* Price Row (Strikethrough old + bold new) */}
-        <div className="mt-2 flex flex-wrap items-baseline gap-1.5">
+        <div className="mt-1.5 flex flex-wrap items-baseline gap-1 sm:gap-1.5">
           {pkg.originalPrice > pkg.price && (
-            <span className="text-[11px] text-slate-400 line-through">
+            <span className="text-[10px] sm:text-[11px] text-slate-400 line-through">
               {new Intl.NumberFormat('uz-UZ').format(pkg.originalPrice)}
             </span>
           )}
@@ -115,25 +115,26 @@ export const PackageCard: React.FC<PackageCardProps> = ({
         </div>
 
         {/* 24-Month Installment Box - EXACT match to screenshot */}
-        <div className="mt-2 p-2 rounded-xl bg-cyan-950/40 border border-cyan-500/30 group-hover:border-cyan-400/50 transition-colors">
+        <div className="mt-1.5 sm:mt-2 p-1.5 sm:p-2 rounded-xl bg-cyan-950/40 border border-cyan-500/30 group-hover:border-cyan-400/50 transition-colors">
           <div className="text-xs sm:text-sm font-black text-cyan-400 leading-tight">
             {formatCurrency(monthly24)}/oy
           </div>
-          <div className="text-[10px] text-cyan-200/70 font-medium">
-            24 oyga bo'lib to'lash
+          <div className="text-[9px] sm:text-[10px] text-cyan-200/70 font-medium">
+            24 oyga 0% halol nasiya
           </div>
         </div>
 
-        {/* Quick action buttons on hover / mobile */}
+        {/* Quick action buttons - Side by side: [Bo'lib to'lash] [Sotib olish] */}
         {onQuickBook && (
-          <div className="mt-2.5 grid grid-cols-2 gap-1.5 pt-1">
+          <div className="mt-2 grid grid-cols-2 gap-1.5 pt-0.5">
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 triggerHaptic('medium');
                 onQuickBook(pkg, 'installment');
               }}
-              className="py-1.5 px-2 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 text-[10px] font-bold transition active:scale-95 text-center truncate"
+              className="py-1.5 px-1 sm:px-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 text-[10px] sm:text-[11px] font-bold transition active:scale-95 text-center truncate shadow-sm"
+              title="Bo'lib to'lash"
             >
               Bo'lib to'lash
             </button>
@@ -143,7 +144,8 @@ export const PackageCard: React.FC<PackageCardProps> = ({
                 triggerHaptic('medium');
                 onQuickBook(pkg, 'full');
               }}
-              className="py-1.5 px-2 rounded-lg bg-sky-500 hover:bg-sky-400 text-white text-[10px] font-bold transition active:scale-95 text-center truncate"
+              className="py-1.5 px-1 sm:px-1.5 rounded-lg bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white text-[10px] sm:text-[11px] font-bold transition active:scale-95 text-center truncate shadow-sm shadow-sky-500/20"
+              title="Sotib olish"
             >
               Sotib olish
             </button>

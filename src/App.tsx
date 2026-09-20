@@ -398,7 +398,7 @@ export default function App() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-md mx-auto w-full pb-20">
+      <main className="flex-1 max-w-md mx-auto w-full pb-24">
         {/* TAB 1: EXPLORE (ASOSIY) */}
         {currentTab === 'explore' && (
           <div className="space-y-3 pt-1">
@@ -415,7 +415,7 @@ export default function App() {
             />
 
             {/* Section Title - Matches screenshot: "🔥 Chegirmadagi turlar" */}
-            <div className="px-4 pt-1">
+            <div className="px-3 sm:px-4 pt-1">
               <div className="flex items-center justify-between mb-2">
                 <h2 className="text-base sm:text-lg font-black tracking-tight text-white flex items-center gap-1.5">
                   <span className="text-rose-500">🔥</span> Chegirmadagi turlar
@@ -429,7 +429,7 @@ export default function App() {
               </div>
 
               {/* Category Filter Chips */}
-              <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2">
+              <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar pb-2">
                 {[
                   { id: 'all' as const, label: 'Hammasi' },
                   { id: 'discount' as const, label: 'Chegirmalar' },
@@ -454,7 +454,7 @@ export default function App() {
               </div>
 
               {/* 2-Column Grid (Matches screenshot) */}
-              <div className="grid grid-cols-2 gap-3 mt-1">
+              <div className="grid grid-cols-2 gap-2.5 sm:gap-3 mt-1">
                 {explorePackages.map((pkg) => (
                   <PackageCard
                     key={pkg.id}

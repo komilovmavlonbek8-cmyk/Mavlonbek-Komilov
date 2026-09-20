@@ -189,16 +189,16 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
       </div>
 
       {/* Tur Firma Ro'yxatdan O'tkazish B2B Banneri (User Request) */}
-      <div className="p-3.5 rounded-2xl bg-gradient-to-r from-indigo-950 via-slate-900 to-sky-950 border border-indigo-500/40 shadow-xl flex items-center justify-between gap-3">
+      <div className="p-3 sm:p-3.5 rounded-2xl bg-gradient-to-r from-indigo-950 via-slate-900 to-sky-950 border border-indigo-500/40 shadow-xl flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-3">
         <div className="flex items-center gap-2.5 min-w-0">
-          <div className="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 flex items-center justify-center shrink-0">
-            <Building2 className="w-5 h-5" />
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 flex items-center justify-center shrink-0">
+            <Building2 className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
           </div>
-          <div className="min-w-0">
+          <div className="min-w-0 flex-1">
             <div className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-indigo-500/20 text-[9px] font-bold text-indigo-300 mb-0.5">
               <span>B2B Hamkorlik</span>
             </div>
-            <h4 className="font-extrabold text-xs text-white truncate">Tur Firmangizni Ro‘yxatdan O‘tkazing</h4>
+            <h4 className="font-extrabold text-xs text-white">Tur Firmangizni Ro‘yxatdan O‘tkazing</h4>
             <p className="text-[10px] text-slate-300 truncate">Stories, Reels va turlaringizni joylang</p>
           </div>
         </div>
@@ -208,7 +208,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
             triggerHaptic('light');
             onOpenAgencyCabinet();
           }}
-          className="px-3 py-2 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white font-extrabold text-[11px] shadow-md active:scale-95 transition shrink-0 whitespace-nowrap"
+          className="w-full sm:w-auto px-3 py-2 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white font-extrabold text-[11px] shadow-md active:scale-95 transition shrink-0 text-center"
         >
           Ro‘yxatdan O‘tish
         </button>

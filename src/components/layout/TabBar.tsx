@@ -19,12 +19,14 @@ export const TabBar: React.FC<TabBarProps> = ({ currentTab, onSelectTab, theme =
   ];
 
   return (
-    <nav className={`fixed bottom-0 left-0 right-0 z-40 backdrop-blur-lg border-t safe-area-pb transition-colors ${
+    <nav className={`fixed bottom-0 left-0 right-0 z-50 backdrop-blur-lg border-t transition-colors ${
       theme === 'light'
-        ? 'bg-white/95 border-slate-200 shadow-[0_-4px_16px_rgba(0,0,0,0.04)]'
-        : 'bg-[#0b111e]/95 border-slate-800/80'
-    }`}>
-      <div className="max-w-md mx-auto flex items-center justify-around px-2 py-1.5">
+        ? 'bg-white/95 border-slate-200 shadow-[0_-4px_16px_rgba(0,0,0,0.06)]'
+        : 'bg-[#0b111e]/95 border-slate-800/90 shadow-[0_-4px_16px_rgba(0,0,0,0.4)]'
+    }`}
+    style={{ paddingBottom: 'max(env(safe-area-inset-bottom, 0px), 6px)' }}
+    >
+      <div className="max-w-md mx-auto flex items-center justify-around px-1 py-1.5">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = currentTab === tab.id;
@@ -36,7 +38,7 @@ export const TabBar: React.FC<TabBarProps> = ({ currentTab, onSelectTab, theme =
                 triggerHaptic('light');
                 onSelectTab(tab.id);
               }}
-              className={`flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all duration-200 active:scale-95 ${
+              className={`flex-1 flex flex-col items-center justify-center py-1 rounded-xl transition-all duration-200 active:scale-95 ${
                 isActive
                   ? 'text-sky-500 font-bold'
                   : theme === 'light'
@@ -50,7 +52,7 @@ export const TabBar: React.FC<TabBarProps> = ({ currentTab, onSelectTab, theme =
                   <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-sky-500 rounded-full animate-pulse" />
                 )}
               </div>
-              <span className="text-[11px] mt-1 tracking-tight whitespace-nowrap">
+              <span className="text-[11px] mt-0.5 tracking-tight font-medium whitespace-nowrap">
                 {tab.label}
               </span>
             </button>
