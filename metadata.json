@@ -1,0 +1,6 @@
+{
+  "name": "Guzasht",
+  "description": "Guzasht Travel — Telegram Web App va mobil turizm marketplace platformasi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
