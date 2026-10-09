@@ -38,6 +38,9 @@ import { TravelCertificateModal } from './components/certificate/TravelCertifica
 import { CompanyProfileModal } from './components/companies/CompanyProfileModal';
 import { AgencyRegisterModal } from './components/companies/AgencyRegisterModal';
 
+import { AiAssistantModal } from './components/assistant/AiAssistantModal';
+import { AiFloatingButton } from './components/assistant/AiFloatingButton';
+
 export default function App() {
   // Navigation & Modals state
   const [currentTab, setCurrentTab] = useState<TabType>('explore');
@@ -46,6 +49,7 @@ export default function App() {
   const [isDemoInfoOpen, setIsDemoInfoOpen] = useState(false);
   const [isCoinsModalOpen, setIsCoinsModalOpen] = useState(false);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
+  const [isAiAssistantOpen, setIsAiAssistantOpen] = useState(false);
 
   // New Feature Modals state
   const [selectedCertificateOrder, setSelectedCertificateOrder] = useState<BookingOrder | null>(null);
@@ -395,6 +399,7 @@ export default function App() {
         onOpenSearch={() => setIsSearchOpen(true)}
         onOpenDemoInfo={() => setIsDemoInfoOpen(true)}
         onOpenCoinsModal={() => setIsCoinsModalOpen(true)}
+        onOpenAiAssistant={() => setIsAiAssistantOpen(true)}
       />
 
       {/* Main Content Area */}
@@ -490,6 +495,7 @@ export default function App() {
             onLikePost={handleLikePost}
             onDislikePost={handleDislikePost}
             onReportPost={handleReportPost}
+            onOpenAiAssistant={() => setIsAiAssistantOpen(true)}
           />
         )}
 
@@ -529,6 +535,17 @@ export default function App() {
       <TabBar currentTab={currentTab} onSelectTab={setCurrentTab} theme={theme} />
 
       {/* MODALS */}
+      {/* 0. AI Travel Assistant Floating Button */}
+      <AiFloatingButton onClick={() => setIsAiAssistantOpen(true)} />
+
+      {/* 0.1 AI Travel Assistant Modal (Gemini 3.8 Flash) */}
+      <AiAssistantModal
+        isOpen={isAiAssistantOpen}
+        onClose={() => setIsAiAssistantOpen(false)}
+        theme={theme}
+        onNavigateToTab={(t) => setCurrentTab(t)}
+      />
+
       {/* 1. Hamburger Drawer */}
       <HamburgerDrawer
         isOpen={isMenuOpen}
@@ -540,6 +557,7 @@ export default function App() {
         onOpenDemoInfo={() => setIsDemoInfoOpen(true)}
         onSelectVipTours={() => setCurrentTab('market')}
         onOpenAgencyCabinet={() => setIsAgencyCabinetOpen(true)}
+        onOpenAiAssistant={() => setIsAiAssistantOpen(true)}
       />
 
       {/* 2. DEMO Badge Modal */}

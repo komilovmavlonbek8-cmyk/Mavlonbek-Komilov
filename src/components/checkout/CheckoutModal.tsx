@@ -111,6 +111,13 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
     setLastCreatedOrder(order);
     onBookingSuccess(order);
     setStep(4);
+
+    // Sync order to backend
+    fetch('/api/orders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(order),
+    }).catch((err) => console.warn('Could not sync order to backend:', err));
   };
 
   const handleSendMessage = (e: React.FormEvent) => {

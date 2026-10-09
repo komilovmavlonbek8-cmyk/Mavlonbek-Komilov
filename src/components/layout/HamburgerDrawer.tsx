@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { 
   X, PhoneCall, HeartHandshake, ShieldAlert, 
   Settings, Globe, Moon, Sun, Lock, ExternalLink, ChevronRight, 
-  FileText, User, Building2, HelpCircle, Gift, Plane, Send, ShieldCheck
+  FileText, User, Building2, HelpCircle, Gift, Plane, Send, ShieldCheck, Sparkles
 } from 'lucide-react';
 import { UserProfile } from '../../types';
 import { triggerHaptic } from '../../lib/twa';
@@ -22,6 +22,7 @@ interface HamburgerDrawerProps {
   onOpenDemoInfo: () => void;
   onSelectVipTours: () => void;
   onOpenAgencyCabinet: () => void;
+  onOpenAiAssistant?: () => void;
 }
 
 export const HamburgerDrawer: React.FC<HamburgerDrawerProps> = ({
@@ -34,6 +35,7 @@ export const HamburgerDrawer: React.FC<HamburgerDrawerProps> = ({
   onOpenDemoInfo,
   onSelectVipTours,
   onOpenAgencyCabinet,
+  onOpenAiAssistant,
 }) => {
   const [currentLang, setCurrentLang] = useState<'uz' | 'ru' | 'en'>('uz');
 
@@ -131,6 +133,32 @@ export const HamburgerDrawer: React.FC<HamburgerDrawerProps> = ({
 
           {/* Menu Items */}
           <div className="flex-1 p-4 space-y-2 text-sm">
+            {/* 0. AI Sayohat Maslahatchisi */}
+            <button
+              onClick={() => {
+                triggerHaptic('medium');
+                onClose();
+                if (onOpenAiAssistant) onOpenAiAssistant();
+              }}
+              className="w-full flex items-center justify-between p-3 rounded-2xl bg-gradient-to-r from-cyan-600/30 via-sky-600/25 to-indigo-600/30 border border-cyan-500/50 text-white font-medium hover:border-cyan-400 transition shadow-sm text-left group"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyan-500 to-sky-500 text-white flex items-center justify-center font-black text-xs shadow-md shadow-cyan-500/30 group-hover:scale-105 transition">
+                  <Sparkles className="w-4 h-4 text-white animate-pulse" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-1.5">
+                    <p className="text-xs font-bold leading-none text-white">AI Sayohat Maslahatchisi</p>
+                    <span className="px-1.5 py-0.5 rounded bg-cyan-500/25 text-cyan-300 text-[8px] font-black uppercase">
+                      Gemini
+                    </span>
+                  </div>
+                  <p className="text-[10px] text-cyan-200 mt-1">24/7 Aqlli savol-javob & tavsiyalar</p>
+                </div>
+              </div>
+              <ChevronRight className="w-4 h-4 text-cyan-400 group-hover:translate-x-0.5 transition" />
+            </button>
+
             {/* 1. 2233 Hotline - Social mission */}
             <a
               href="tel:2233"

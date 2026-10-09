@@ -10,6 +10,7 @@ interface TopBarProps {
   onOpenSearch: () => void;
   onOpenDemoInfo: () => void;
   onOpenCoinsModal: () => void;
+  onOpenAiAssistant?: () => void;
 }
 
 export const TopBar: React.FC<TopBarProps> = ({
@@ -20,6 +21,7 @@ export const TopBar: React.FC<TopBarProps> = ({
   onOpenSearch,
   onOpenDemoInfo,
   onOpenCoinsModal,
+  onOpenAiAssistant,
 }) => {
   return (
     <header className={`sticky top-0 z-40 backdrop-blur-md border-b px-3 sm:px-4 py-2.5 sm:py-3 transition-colors ${
@@ -102,6 +104,22 @@ export const TopBar: React.FC<TopBarProps> = ({
             <Coins className="w-3 h-3 text-amber-500 shrink-0" />
             <span>{coins.toLocaleString()}</span>
           </button>
+
+          {/* AI Assistant button */}
+          {onOpenAiAssistant && (
+            <button
+              onClick={() => {
+                triggerHaptic('medium');
+                onOpenAiAssistant();
+              }}
+              className="flex items-center gap-1 px-2 py-1 rounded-xl bg-gradient-to-r from-cyan-500/20 to-sky-500/20 hover:from-cyan-500/30 hover:to-sky-500/30 text-cyan-400 hover:text-cyan-300 border border-cyan-500/40 text-[11px] font-bold active:scale-95 transition-all shrink-0"
+              title="Guzasht AI Sayohat Maslahatchisi"
+              aria-label="AI Yordamchi"
+            >
+              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+              <span>AI</span>
+            </button>
+          )}
 
           {/* Search button */}
           <button

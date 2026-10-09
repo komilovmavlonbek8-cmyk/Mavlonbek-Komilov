@@ -12,6 +12,7 @@ interface RecommendViewProps {
   onLikePost: (postId: string) => void;
   onDislikePost: (postId: string) => void;
   onReportPost: (postId: string) => void;
+  onOpenAiAssistant?: () => void;
 }
 
 export const RecommendView: React.FC<RecommendViewProps> = ({
@@ -20,6 +21,7 @@ export const RecommendView: React.FC<RecommendViewProps> = ({
   onLikePost,
   onDislikePost,
   onReportPost,
+  onOpenAiAssistant,
 }) => {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [activeAlgorithmFilter, setActiveAlgorithmFilter] = useState<'smart' | 'trending' | 'recent'>('smart');
@@ -103,6 +105,37 @@ export const RecommendView: React.FC<RecommendViewProps> = ({
           <Plus className="w-6 h-6 text-sky-600" />
         </button>
       </div>
+
+      {/* AI Travel Assistant Prompt Card */}
+      {onOpenAiAssistant && (
+        <div 
+          onClick={() => {
+            triggerHaptic('medium');
+            onOpenAiAssistant();
+          }}
+          className="p-3.5 rounded-2xl bg-gradient-to-r from-cyan-900/40 via-sky-900/30 to-indigo-900/40 border border-cyan-500/40 shadow-lg cursor-pointer hover:border-cyan-400/80 active:scale-[0.99] transition flex items-center justify-between gap-3"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-cyan-500 to-sky-600 flex items-center justify-center shrink-0 shadow-md shadow-cyan-500/25">
+              <Sparkles className="w-5 h-5 text-white animate-pulse" />
+            </div>
+            <div>
+              <div className="flex items-center gap-1.5">
+                <h4 className="font-bold text-xs text-white">Qayerga sayohat qilishni bilmayapsizmi?</h4>
+                <span className="px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 text-[8px] font-black uppercase">
+                  Gemini AI
+                </span>
+              </div>
+              <p className="text-[11px] text-cyan-200 mt-0.5">
+                AI Sayohat Maslahatchisidan shaxsiy tavsiya va reja so‘rang
+              </p>
+            </div>
+          </div>
+          <span className="text-xs font-bold text-cyan-400 shrink-0 flex items-center gap-0.5">
+            So‘rash →
+          </span>
+        </div>
+      )}
 
       {/* Algorithm Filter Header */}
       <div className="flex items-center justify-between gap-2 p-1.5 bg-slate-900/90 rounded-2xl border border-slate-800 text-xs">
